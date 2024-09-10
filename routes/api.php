@@ -18,3 +18,6 @@ Route::prefix('v1')->group(function () {
         });
     });
 });
+Route::post('test', function (Request $request) {
+    \App\Models\Answer::query()->first()->storeMedia($request->file('file'));
+});

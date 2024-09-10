@@ -33,11 +33,11 @@ class QuizController extends Controller
      *
      * @authenticated
      * @apiResource App\Http\Resources\Quiz\QuizResource
-     * @apiResourceModel App\Models\Quiz with=questions,questions.answers
+     * @apiResourceModel App\Models\Quiz with=questions,questions.answers,questions.media,questions.answers.media
      */
     public function show(Quiz $quiz)
     {
-        $quiz->load(['questions', 'questions.answers']);
+        $quiz->load(['questions', 'questions.answers', 'questions.media', 'questions.answers.media']);
         return new QuizResource($quiz);
     }
 }

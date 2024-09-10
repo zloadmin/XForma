@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Answer;
 
+use App\Http\Resources\Media\MediaResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +17,8 @@ class AnswerResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'text' => $this->text
+            'text' => $this->text,
+            'media'   => MediaResource::collection($this->whenLoaded('media'))
         ];
     }
 }
