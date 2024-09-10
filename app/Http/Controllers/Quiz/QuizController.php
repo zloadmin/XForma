@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Quiz;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Quiz\QuizResource;
+use App\Http\Resources\UserAnswer\UserAnswerResource;
+use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\UserAnswer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * @group Квизы
  */
-class QuizController extends Controller
+class QuizController extends ApiController
 {
 
     /**
@@ -29,7 +34,7 @@ class QuizController extends Controller
     }
 
     /**
-     * Квиз с ответами и вопросами
+     * Получить квиз c вопросами и вариантами ответов
      *
      * @authenticated
      * @apiResource App\Http\Resources\Quiz\QuizResource
@@ -39,5 +44,64 @@ class QuizController extends Controller
     {
         $quiz->load(['questions', 'questions.answers', 'questions.media', 'questions.answers.media']);
         return new QuizResource($quiz);
+    }
+
+    /**
+     * Статистика ответов квиза
+     *
+     * @authenticated
+     * @response {"quiz_questions":36,"all_answers":0,"right_answers":0,"wrong_answers":0}
+     */
+    public function statistics(Quiz $quiz)
+    {
+        $answers = UserAnswer::quiz($quiz)->user(auth()->user())->get();
+
+        return $this->respond([
+            'quiz_questions' => $quiz->questions()->count(),
+            'all_answers'    => $answers->count(),
+            'right_answers'  => $answers->where('is_right', true)->count(),
+            'wrong_answers'  => $answers->where('is_right', false)->count(),
+        ]);
+    }
+
+    /**
+     * Ответить на вопрос
+     *
+     * @response status=404 scenario="Quiz not found"  {"status":"error","message":"Quiz not found"}
+     * @response status=404 scenario="Question not found"  {"status":"error","message":"Question not found"}
+     * @response status=404 scenario="Answer not found"  {"status":"error","message":"Answer not found"}
+     * @response status=400 scenario="Answer already exists"  {"status":"error","message":"Answer already exists"}
+     * @apiResource App\Http\Resources\UserAnswer\UserAnswerResource
+     * @apiResourceModel App\Models\UserAnswer
+     * @param int $quiz_id
+     * @param int $question_id
+     * @param int $answer_id
+     * @return UserAnswerResource|JsonResponse
+     */
+    public function answerToQuestion(int $quiz_id, int $question_id, int $answer_id)
+    {
+        $quiz = Quiz::find($quiz_id);
+        if (!$quiz) return $this->respondNotFound('Quiz not found');
+
+        $question = $quiz->questions()->where('id', $question_id)->first();
+        if (!$question) return $this->respondNotFound('Question not found');
+
+        $answer = $question->answers()->where('id', $answer_id)->first();
+        if (!$answer) return $this->respondNotFound('Answer not found');
+
+        $userAnswerExists = UserAnswer::quiz($quiz)->question($question)->answer($answer)->user(auth()->user())->exists();
+
+        if ($userAnswerExists) {
+            return $this->respondBadRequest('Answer already exists');
+        }
+        $userAnswer = UserAnswer::create([
+            'user_id'     => auth()->id(),
+            'quiz_id'     => $quiz->id,
+            'question_id' => $question->id,
+            'answer_id'   => $answer->id,
+            'is_right'    => $answer->is_right,
+        ]);
+        return new UserAnswerResource($userAnswer);
+
     }
 }

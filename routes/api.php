@@ -14,10 +14,12 @@ Route::prefix('v1')->group(function () {
         Route::get('info', [AuthController::class, 'info']);
         Route::prefix('quiz')->group(function () {
             Route::get('list', [QuizController::class, 'list']);
-            Route::get('show/{quiz}', [QuizController::class, 'show']);
+            Route::get('{quiz}', [QuizController::class, 'show']);
+            Route::get('{quiz}/statistics', [QuizController::class, 'statistics']);
+            Route::put('{quiz_id}/question/{question_id}/answer/{answer_id}', [QuizController::class, 'answerToQuestion']);
         });
     });
 });
-Route::post('test', function (Request $request) {
-    \App\Models\Answer::query()->first()->storeMedia($request->file('file'));
-});
+//Route::post('test', function (Request $request) {
+//    \App\Models\Answer::query()->first()->storeMedia($request->file('file'));
+//});

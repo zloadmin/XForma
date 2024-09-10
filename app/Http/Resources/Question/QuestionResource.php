@@ -19,8 +19,8 @@ class QuestionResource extends JsonResource
         return [
             'id'      => $this->id,
             'text'    => $this->text,
+            'media'   => MediaResource::collection($this->whenLoaded('media')),
             'answers' => AnswerResource::collection($this->whenLoaded('answers')),
-            'media'   => MediaResource::collection($this->whenLoaded('media'))
         ];
     }
 }
