@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('answer_id')->index();
             $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->boolean('is_right');
-//            $table->unsignedBigInteger('spend_time')->nullable();
+            $table->unsignedInteger('spend_time')->nullable();
             $table->unique(['user_id', 'quiz_id', 'question_id', 'answer_id']);
             $table->timestamp('created_at')->nullable();
         });

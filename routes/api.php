@@ -16,7 +16,7 @@ Route::prefix('v1')->group(function () {
             Route::get('list', [QuizController::class, 'list']);
             Route::get('{quiz}', [QuizController::class, 'show']);
             Route::get('{quiz}/statistics', [QuizController::class, 'statistics']);
-            Route::put('{quiz_id}/question/{question_id}/answer/{answer_id}', [QuizController::class, 'answerToQuestion']);
+            Route::post('{quiz_id}/question/{question_id}/answer/{answer_id}', [QuizController::class, 'answerToQuestion']);
         });
     });
 });

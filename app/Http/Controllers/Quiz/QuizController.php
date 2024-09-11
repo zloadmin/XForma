@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Quiz;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAnswer\StoreUserAnswer;
 use App\Http\Resources\Quiz\QuizResource;
 use App\Http\Resources\UserAnswer\UserAnswerResource;
 use App\Models\Question;
@@ -67,18 +68,20 @@ class QuizController extends ApiController
     /**
      * Ответить на вопрос
      *
+     * @response status=400 scenario="Answer already exists"  {"status":"error","message":"Answer already exists"}
      * @response status=404 scenario="Quiz not found"  {"status":"error","message":"Quiz not found"}
      * @response status=404 scenario="Question not found"  {"status":"error","message":"Question not found"}
      * @response status=404 scenario="Answer not found"  {"status":"error","message":"Answer not found"}
-     * @response status=400 scenario="Answer already exists"  {"status":"error","message":"Answer already exists"}
+     * @response status=422 scenario="Validation Errors" {"message":"The spend time field is required.","errors":{"spend_time":["The spend time field is required."]}}
      * @apiResource App\Http\Resources\UserAnswer\UserAnswerResource
      * @apiResourceModel App\Models\UserAnswer
+     * @param StoreUserAnswer $request
      * @param int $quiz_id
      * @param int $question_id
      * @param int $answer_id
      * @return UserAnswerResource|JsonResponse
      */
-    public function answerToQuestion(int $quiz_id, int $question_id, int $answer_id)
+    public function answerToQuestion(StoreUserAnswer $request, int $quiz_id, int $question_id, int $answer_id)
     {
         $quiz = Quiz::find($quiz_id);
         if (!$quiz) return $this->respondNotFound('Quiz not found');
@@ -100,6 +103,7 @@ class QuizController extends ApiController
             'question_id' => $question->id,
             'answer_id'   => $answer->id,
             'is_right'    => $answer->is_right,
+            'spend_time'  => $request->spend_time
         ]);
         return new UserAnswerResource($userAnswer);
 

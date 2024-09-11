@@ -21,6 +21,7 @@ class UserAnswerResource extends JsonResource
             'question_id' => $this->question_id,
             'answer_id'   => $this->answer_id,
             'is_right'    => (bool)$this->is_right,
+            'spend_time'  => $this->spend_time,
             'created_at'  => $this->created_at
         ];
     }

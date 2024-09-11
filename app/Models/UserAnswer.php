@@ -10,6 +10,9 @@ class UserAnswer extends Model
     use HasFactory;
     protected $guarded = [];
     const UPDATED_AT = null;
+    protected $casts = [
+        'spend_time' => 'integer'
+    ];
 
     /**
      * Scope a query to only include quiz.
