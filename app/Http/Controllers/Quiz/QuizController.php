@@ -103,7 +103,8 @@ class QuizController extends ApiController
             'question_id' => $question->id,
             'answer_id'   => $answer->id,
             'is_right'    => $answer->is_right,
-            'spend_time'  => $request->spend_time
+            'spend_time'  => $request->spend_time,
+            // TODO: save question with answers.
         ]);
         return new UserAnswerResource($userAnswer);
 

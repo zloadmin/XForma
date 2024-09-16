@@ -7,10 +7,10 @@
     <form wire:submit.prevent="login">
         <!--- Email address Field --->
         <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control @error('email') is-invalid @enderror" type="text" wire:model="email" id="email" placeholder="Введите ваш email">
-            @error('email')
-            <span class="invalid-feedback" role="alert">
+            <label for="email">Логин</label>
+            <input class="form-control @error('username') is-invalid @enderror" type="text" wire:model="username" id="username" placeholder="Введите ваш логин">
+            @error('username')
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror

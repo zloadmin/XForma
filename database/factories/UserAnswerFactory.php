@@ -25,7 +25,8 @@ class UserAnswerFactory extends Factory
             'quiz_id'     => Quiz::factory(),
             'question_id' => Question::factory(),
             'answer_id'   => Answer::factory(),
-            'is_right'    => rand(0, 1)
+            'is_right'    => rand(0, 1),
+            'spend_time'  => rand(1, 60 * 60)
         ];
     }
 }

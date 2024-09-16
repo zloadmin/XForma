@@ -20,6 +20,21 @@ trait HasBreadcrumb
         return [route('quizzes-page') => 'Квизы'];
     }
 
+    private function getUserAnswersPageItem(): array
+    {
+        return [route('user-answers-page') => 'Ответы'];
+    }
+
+    private function getUsersPageItem(): array
+    {
+        return [route('users-page') => 'Пользователи'];
+    }
+
+    private function getCreateUserPageItem(): array
+    {
+        return [route('create-user-page') => 'Создать пользователя'];
+    }
+
     private function getCreateQuizPageItem(): array
     {
         return [route('create-quiz-page') => 'Создать квиз'];
@@ -53,6 +68,21 @@ trait HasBreadcrumb
     private function getQuizzesPageBreadcrumb(): array
     {
         return $this->getQuizzesPageItem();
+    }
+
+    private function getUserAnswersPageBreadcrumb(): array
+    {
+        return $this->getUserAnswersPageItem();
+    }
+
+    private function getUsersPageBreadcrumb(): array
+    {
+        return $this->getUsersPageItem();
+    }
+
+    private function getCreateUserPageBreadcrumb(): array
+    {
+        return $this->getUsersPageItem() + $this->getCreateUserPageItem();
     }
 
     private function getCreateQuizPageBreadcrumb()

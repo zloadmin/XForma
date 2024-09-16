@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\User\UserRole;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -19,13 +20,22 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'email'    => 'test@test.com',
-            'password' => Hash::make('password')
+            'username'  => 'admin',
+            'password'  => Hash::make('admin'),
+            'is_active' => true,
+            'full_name'      => 'Иванов Иван Иванович',
+            'role'      => UserRole::Admin,
         ]);
         $accessToken = $user->createToken('seeder');
         $envService = new Env();
         $envService->set("SCRIBE_AUTH_KEY", $accessToken->plainTextToken);
-
+        User::factory()->create([
+            'username'  => 'user',
+            'password'  => Hash::make('user'),
+            'is_active' => true,
+            'full_name'      => 'Иванов Иван Иванович',
+            'role'      => UserRole::Student,
+        ]);
 
         User::factory(10)->create();
 

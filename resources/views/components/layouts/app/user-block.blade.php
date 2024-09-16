@@ -6,8 +6,8 @@
                                         <img src="/hyper/images/a.png" alt="user-image" class="rounded-circle">
                                     </span>
             <span>
-                                        <span class="account-user-name">{{ auth()->user()->name }}</span>
-                                    <span class="account-position">{{  auth()->user()->email  }}</span>
+                                        <span class="account-user-name">{{ auth()->user()->full_name }}</span>
+                                    <span class="account-position">{{  auth()->user()->role->label()  }}</span>
                                     </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">

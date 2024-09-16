@@ -14,7 +14,7 @@ trait HasQuestionForm
 //    use WithFileUploads;
     #[Validate([
         'answerList'   => ['required', 'array'],
-        'answerList.*' => ['required', 'min:3',],
+        'answerList.*' => ['required'],
     ])]
     public array $answerList;
 

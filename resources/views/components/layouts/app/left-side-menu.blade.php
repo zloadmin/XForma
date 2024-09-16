@@ -26,11 +26,22 @@
                                 </li>
                                 <li class="side-nav-item">
                                     <a href="{{ route('quizzes-page') }}" class="side-nav-link" wire:navigate>
-                                        <i class=" uil-science"></i>
+                                        <i class="uil-science"></i>
                                         <span>Квизы</span>
                                     </a>
                                 </li>
-
+                                <li class="side-nav-item">
+                                    <a href="{{ route('user-answers-page') }}" class="side-nav-link" wire:navigate>
+                                        <i class="uil-user-check"></i>
+                                        <span>Ответы</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="{{ route('users-page') }}" class="side-nav-link" wire:navigate>
+                                        <i class="uil-users-alt"></i>
+                                        <span>Пользователи</span>
+                                    </a>
+                                </li>
 
                             </ul>
 

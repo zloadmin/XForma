@@ -1,11 +1,13 @@
 <?php
 
+use App\Enums\User\UserEducationMode;
+use App\Enums\User\UserRole;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +15,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+
+            $table->string('username', User::USERNAME_MAX)->unique()->comment('Логин');
+            $table->string('password')->comment('Пароль');
+            $table->string('full_name')->comment('Имя обучающегося (фио)');
+            $table->unsignedSmallInteger('age')->nullable()->comment('Возраст');
+            $table->string('company_name')->nullable()->comment('Организация');
+            $table->string('job_title')->nullable()->comment('Должность');
+            $table->text('note')->nullable()->comment('Примечание');
+            $table->enum('education_mode', UserEducationMode::values())->nullable()->comment('Режим обучения');
+            $table->boolean('is_active')->index()->default(true);
+            $table->enum('role', UserRole::values())->index()->default(UserRole::Student)->comment('Роль');
+
+            // TODO: make relationship - Экзамен - случайное задание или задание из списка билетов (множественный выбор)
+
             $table->rememberToken();
             $table->timestamps();
         });

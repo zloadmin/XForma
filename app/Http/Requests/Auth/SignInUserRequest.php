@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignInUserRequest extends FormRequest
@@ -22,7 +23,7 @@ class SignInUserRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'email'    => ['description' => 'Email', 'example' => 'test@test.com'],
+            'username' => ['description' => 'Логин', 'example' => 'admin'],
             'password' => ['description' => 'Пароль', 'example' => 'password'],
         ];
     }
@@ -35,7 +36,7 @@ class SignInUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'    => ['required', 'email'],
+            'username' => ['required', 'string', 'max:' . User::USERNAME_MAX],
             'password' => ['required'],
         ];
     }
