@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/quiz/{quiz}/question/{question}/edit', EditQuestionPage::class)->name('edit-question-page');
 
     Route::get('/user-answers', UserAnswersPage::class)->name('user-answers-page');
+//    Route::get('/users', \App\Livewire\UsersTable::class)->name('users-page');
     Route::get('/users', UsersPage::class)->name('users-page');
     Route::get('/user/create', CreateUserPage::class)->name('create-user-page');
     Route::get('/user/{user}/edit', EditUserPage::class)->name('edit-user-page');

@@ -3,4 +3,5 @@
         <i class="mdi mdi-plus-circle mr-2"></i>
         Создать
     </a>
+    <livewire:data-tables.users-table />
 </div>

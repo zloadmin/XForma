@@ -7,6 +7,7 @@ namespace App\Livewire\Traits;
 
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\User;
 
 trait HasBreadcrumb
 {
@@ -33,6 +34,10 @@ trait HasBreadcrumb
     private function getCreateUserPageItem(): array
     {
         return [route('create-user-page') => 'Создать пользователя'];
+    }
+    private function getEditUserPageItem(User $user): array
+    {
+        return [route('edit-user-page', $user) => 'Редактировать пользователя'];
     }
 
     private function getCreateQuizPageItem(): array
@@ -83,6 +88,10 @@ trait HasBreadcrumb
     private function getCreateUserPageBreadcrumb(): array
     {
         return $this->getUsersPageItem() + $this->getCreateUserPageItem();
+    }
+    private function getEditUserPageBreadcrumb(User $user): array
+    {
+        return $this->getUsersPageItem() + $this->getEditUserPageItem($user);
     }
 
     private function getCreateQuizPageBreadcrumb()

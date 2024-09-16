@@ -9,6 +9,7 @@ use App\Livewire\Traits\HasBreadcrumb;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class EditUserPage extends Component
@@ -43,7 +44,7 @@ class EditUserPage extends Component
         $this->company_name = $user->company_name;
         $this->job_title = $user->job_title;
         $this->note = $user->note;
-        $this->education_mode = $user->education_mode;
+        $this->education_mode = $user->education_mode->value;
         $this->is_active = $user->is_active;
         $this->role = $user->role->value;
         $this->password = '';
@@ -73,10 +74,11 @@ class EditUserPage extends Component
         $this->user->update();
     }
 
+    #[Title('Редактировать пользователя')]
     public function render()
     {
         return view('livewire.pages.edit-user-page')->layoutData([
-            'breadcrumb' => $this->getCreateUserPageBreadcrumb()
+            'breadcrumb' => $this->getEditUserPageBreadcrumb($this->user)
         ]);
     }
 }
