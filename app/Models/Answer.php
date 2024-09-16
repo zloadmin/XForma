@@ -10,4 +10,5 @@ class Answer extends Model
 {
     use HasFactory;
     use Mediable;
+    protected $guarded = [];
 }

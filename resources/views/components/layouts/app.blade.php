@@ -12,7 +12,9 @@
     <div class="content-page">
         <div class="content">
 
-            @include('components.layouts.app.topbar')
+            @persist('topbar')
+                @include('components.layouts.app.topbar')
+            @endpersist
             <!-- Start Content-->
             <div class="container-fluid">
 

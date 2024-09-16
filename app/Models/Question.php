@@ -11,6 +11,7 @@ class Question extends Model
 {
     use HasFactory;
     use Mediable;
+    protected $guarded = [];
 
     public function answers(): HasMany
     {

@@ -168,6 +168,10 @@ return [
         'occupation id' => 'профессия',
         'additional_services' => 'дополнительные услуги',
         'word' => 'слово',
+        'quiz_name' => 'название квиза',
+        'question_text' => 'текст вопроса',
+        'question_media' => 'медиа файл вопроса',
+        'is_right' => 'правильный',
     ],
 
 ];

@@ -5,7 +5,7 @@
                 @if($loop->last)
                     {{ $name }}
                 @else
-                    <a href="{{ $link }}">
+                    <a href="{{ $link }}" wire:navigate>
                         {{ $name }}
                     </a>
                 @endif
