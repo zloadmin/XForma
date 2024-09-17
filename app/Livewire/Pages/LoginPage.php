@@ -38,7 +38,8 @@ class LoginPage extends Component
             'password' => $this->password,
             fn(Builder $query) => $query->where('role', UserRole::Admin),
         ])) {
-            return redirect()->route('dashboard');
+//            return redirect()->route('dashboard');
+            return $this->redirectRoute('dashboard', [], true, true);
         }
 //        if (Auth::attempt($this->credentials)) {
 //            return redirect()->route('dashboard');
