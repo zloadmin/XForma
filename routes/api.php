@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Quiz\QuizController;
+use App\Http\Controllers\Tikcet\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,10 @@ Route::prefix('v1')->group(function () {
             Route::get('{quiz}', [QuizController::class, 'show']);
             Route::get('{quiz}/statistics', [QuizController::class, 'statistics']);
             Route::post('{quiz_id}/question/{question_id}/answer/{answer_id}', [QuizController::class, 'answerToQuestion']);
+        });
+        Route::prefix('ticket')->group(function () {
+            Route::get('list', [TicketController::class, 'list']);
+            Route::get('{ticket}', [TicketController::class, 'show']);
         });
     });
 });
