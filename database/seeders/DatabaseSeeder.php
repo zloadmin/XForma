@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             QuizSeeder::class,
             UserAnswerSeeder::class,
             TicketSeeder::class,
-            TicketAnswer::class,
+            TicketAnswerSeeder::class,
         ]);
     }
 }
