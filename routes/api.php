@@ -22,6 +22,8 @@ Route::prefix('v1')->group(function () {
         Route::prefix('ticket')->group(function () {
             Route::get('list', [TicketController::class, 'list']);
             Route::get('{ticket}', [TicketController::class, 'show']);
+            Route::post('answer/{ticket}/{ticketStep}/{ticketStepAction}', [TicketController::class, 'answer']);
+            Route::post('/finish/{ticket}', [TicketController::class, 'finish']);
         });
     });
 });
