@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TicketAnswer;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             QuizSeeder::class,
             UserAnswerSeeder::class,
-            TicketSeeder::class
+            TicketSeeder::class,
+            TicketAnswer::class,
         ]);
     }
 }
