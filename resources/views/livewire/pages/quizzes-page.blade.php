@@ -21,17 +21,16 @@
                 <td>{{ $quiz->name }}</td>
                 <td>{{ $quiz->questions_count }}</td>
                 <td class="table-action text-right">
-                    <a href="{{ route('questions-page', $quiz) }}" class="action-icon" wire:navigate>
-                        <i class="mdi mdi-comment-question"></i>
+                    <a href="{{ route('questions-page', $quiz) }}" class="btn btn-warning" wire:navigate>
+                        Вопросы
                     </a>
-                    <a href="{{ route('edit-quiz-page', $quiz) }}" class="action-icon" wire:navigate>
-                        <i class="mdi mdi-pencil"></i>
+                    <a href="{{ route('edit-quiz-page', $quiz) }}" class="btn btn-success" wire:navigate>
+                        Редактировать
                     </a>
-                    <a href="#" class="action-icon"
+                    <a href="#" class="btn btn-danger"
                             wire:click.prevent="delete({{ $quiz->id }})"
-                            wire:confirm="Удалить квиз?"
-                    >
-                        <i class="mdi mdi-delete"></i>
+                            wire:confirm="Удалить квиз?">
+                        Удалить
                     </a>
 
                 </td>

@@ -19,7 +19,7 @@
                     {{ $question->id }}
                 </td>
                 <td>{{ $question->text }}</td>
-                <td>{{ $question->answers_count }}</td>
+                <td>{{ $question->answer_images_count }}</td>
                 <td class="table-action text-right">
 
                         <a href="{{ route('edit-question-page', [$quiz, $question]) }}" class="action-icon" wire:navigate>

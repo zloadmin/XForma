@@ -1,3 +1,5 @@
 *
 !media
+!livewire-tmp
+!answer_images
 !.gitignore

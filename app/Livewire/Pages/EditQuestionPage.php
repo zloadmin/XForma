@@ -20,31 +20,20 @@ class EditQuestionPage extends Component
     {
         $this->quiz = $quiz;
         $this->question = $question;
-        $this->question_text = $question->text;
-        $this->setAnswers($question);
+        $this->questionText = $question->text;
+        $this->answerImages = [];
+        $this->setExistsAnswerImages();
+        $this->setIsRight();
     }
 
-    public function setAnswers(Question $question)
-    {
-        foreach ($question->answers()->orderBy('id')->get() as $index => $answer) {
-            $this->answerList[] = $answer->text;
-            if ($answer->is_right) {
-                $this->is_right = $index;
-            }
-        }
-    }
 
     public function saveQuestion()
     {
         $this->validate();
-        $this->question->update(['text' => $this->question_text]);
-        $this->question->answers()->delete();
-        foreach ($this->answerList as $index => $answer) {
-            $this->question->answers()->create([
-                'text'     => $answer,
-                'is_right' => $this->is_right == $index
-            ]);
-        }
+        $this->question->update(['text' => $this->questionText]);
+        $this->deleteExistsAnswerImages();
+        $this->storeAnswerImages($this->question);
+        $this->question->updateRightAnswerImageByIndex($this->isRight);
 
         return $this->redirectRoute('questions-page', [$this->quiz], true, true);
     }
@@ -53,6 +42,7 @@ class EditQuestionPage extends Component
     {
         return view('livewire.pages.edit-question-page')
             ->title($this->getTitle())
+            ->layout('components.layouts.app-simple')
             ->layoutData([
                 'breadcrumb' => $this->getEditQuestionQuizPageBreadcrumb($this->quiz, $this->question)
             ]);

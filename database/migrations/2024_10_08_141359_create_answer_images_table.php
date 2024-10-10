@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('answer_images', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('question_id');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->string('path');
+            $table->string('original_name');
+            $table->unsignedBigInteger('size');
+            $table->boolean('is_right')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('answer_images');
+    }
+};

@@ -21,7 +21,7 @@ class QuestionsPage extends Component
     public function render()
     {
         return view('livewire.pages.questions-quiz-page', [
-            'questions' => $this->quiz->questions()->withCount('answers')->get()
+            'questions' => $this->quiz->questions()->withCount('answerImages')->get()
         ])
             ->title($this->getTitle())
             ->layoutData([

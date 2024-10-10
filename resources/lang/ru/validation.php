@@ -169,8 +169,10 @@ return [
         'word'                  => 'слово',
         'quiz_name'             => 'название квиза',
         'question_text'         => 'текст вопроса',
+        'questionText'          => 'текст вопроса',
         'question_media'        => 'медиа файл вопроса',
         'is_right'              => 'правильный',
+        'isRight'               => 'правильный',
         'username'              => 'логин',
         'full_name'             => 'фио',
         'age'                   => 'возраст',
@@ -181,6 +183,7 @@ return [
         'is_active'             => 'активный',
         'role'                  => 'роль',
         'password_confirmation' => 'подтверждение пароля',
+        'answerImages'          => 'ответы',
     ],
 
 ];
