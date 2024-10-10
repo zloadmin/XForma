@@ -5,19 +5,20 @@
     @php
         $key = 0;
     @endphp
-    @foreach($existsAnswerImages as $x => $file)
-        @include('livewire.pages.question.question-form.question-answer-image')
-        @php
-            $key++;
-        @endphp
-    @endforeach
-
-    @foreach($answerImages as $y => $file)
-        @include('livewire.pages.question.question-form.question-answer-image')
-        @php
-            $key++;
-        @endphp
-    @endforeach
+    <div class="row">
+        @foreach($existsAnswerImages as $x => $file)
+            @include('livewire.pages.question.question-form.question-answer-image')
+            @php
+                $key++;
+            @endphp
+        @endforeach
+        @foreach($answerImages as $y => $file)
+            @include('livewire.pages.question.question-form.question-answer-image')
+            @php
+                $key++;
+            @endphp
+        @endforeach
+    </div>
 
     @include('livewire.pages.question.question-form.question-save-button')
 </form>
