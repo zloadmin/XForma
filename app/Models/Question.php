@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Question extends Model
 {
     use HasFactory;
-    use Mediable;
+//    use Mediable;
 
     protected $guarded = [];
 
-    public function answers(): HasMany
-    {
-        return $this->hasMany(Answer::class);
-    }
+//    public function answers(): HasMany
+//    {
+//        return $this->hasMany(Answer::class);
+//    }
 
     public function answerImages(): HasMany
     {

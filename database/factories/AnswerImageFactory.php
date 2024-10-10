@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class AnswerImageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'question_id'   => Question::factory(),
+            'path'          => sprintf('answer_images/%d.jpg', rand(1, 3)),
+            'original_name' => sprintf('%d.jpg', rand(1, 3)),
+            'size'          => 72202,
+            'is_right'      => false,
         ];
     }
 }
