@@ -15,14 +15,14 @@ class UserAnswerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'          => $this->id,
-            'user_id'     => $this->user_id,
-            'quiz_id'     => $this->quiz_id,
-            'question_id' => $this->question_id,
-            'answer_id'   => $this->answer_id,
-            'is_right'    => (bool)$this->is_right,
-            'spend_time'  => $this->spend_time,
-            'created_at'  => $this->created_at
+            'id'              => $this->id,
+            'user_id'         => $this->user_id,
+            'quiz_id'         => $this->quiz_id,
+            'question_id'     => $this->question_id,
+            'answer_image_id' => $this->answer_image_id,
+            'is_right'        => (bool)$this->is_right,
+            'spend_time'      => $this->spend_time,
+            'created_at'      => $this->created_at
         ];
     }
 }

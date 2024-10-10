@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Answer;
+use App\Models\AnswerImage;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\User;
@@ -21,12 +22,12 @@ class UserAnswerFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'     => User::factory(),
-            'quiz_id'     => Quiz::factory(),
-            'question_id' => Question::factory(),
-            'answer_id'   => Answer::factory(),
-            'is_right'    => rand(0, 1),
-            'spend_time'  => rand(1, 60 * 60)
+            'user_id'         => User::factory(),
+            'quiz_id'         => Quiz::factory(),
+            'question_id'     => Question::factory(),
+            'answer_image_id' => AnswerImage::factory(),
+            'is_right'        => rand(0, 1),
+            'spend_time'      => rand(1, 60 * 60)
         ];
     }
 }

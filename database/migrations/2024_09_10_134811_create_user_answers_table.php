@@ -19,11 +19,11 @@ return new class extends Migration {
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
             $table->unsignedBigInteger('question_id')->index();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->unsignedBigInteger('answer_id')->index();
-            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
+            $table->unsignedBigInteger('answer_image_id')->index();
+            $table->foreign('answer_image_id')->references('id')->on('answer_images')->onDelete('cascade');
             $table->boolean('is_right');
             $table->unsignedInteger('spend_time')->nullable();
-            $table->unique(['user_id', 'quiz_id', 'question_id', 'answer_id']);
+            $table->unique(['user_id', 'quiz_id', 'question_id', 'answer_image_id']);
             $table->timestamp('created_at')->nullable();
         });
     }

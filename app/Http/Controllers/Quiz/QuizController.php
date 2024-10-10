@@ -39,11 +39,11 @@ class QuizController extends ApiController
      *
      * @authenticated
      * @apiResource App\Http\Resources\Quiz\QuizResource
-     * @apiResourceModel App\Models\Quiz with=questions,questions.answers,questions.media,questions.answers.media
+     * @apiResourceModel App\Models\Quiz with=questions,questions.answerImages
      */
     public function show(Quiz $quiz)
     {
-        $quiz->load(['questions', 'questions.answers', 'questions.media', 'questions.answers.media']);
+        $quiz->load(['questions', 'questions.answerImages']);
         return new QuizResource($quiz);
     }
 
@@ -55,7 +55,7 @@ class QuizController extends ApiController
      */
     public function statistics(Quiz $quiz)
     {
-        $answers = UserAnswer::quiz($quiz)->user(auth()->user())->get();
+        $answers = UserAnswer::byQuiz($quiz)->byUser(auth()->user())->get();
 
         return $this->respond([
             'quiz_questions' => $quiz->questions()->count(),
@@ -71,17 +71,17 @@ class QuizController extends ApiController
      * @response status=400 scenario="Answer already exists"  {"status":"error","message":"Answer already exists"}
      * @response status=404 scenario="Quiz not found"  {"status":"error","message":"Quiz not found"}
      * @response status=404 scenario="Question not found"  {"status":"error","message":"Question not found"}
-     * @response status=404 scenario="Answer not found"  {"status":"error","message":"Answer not found"}
+     * @response status=404 scenario="Answer image not found"  {"status":"error","message":"Answer image not found"}
      * @response status=422 scenario="Validation Errors" {"message":"The spend time field is required.","errors":{"spend_time":["The spend time field is required."]}}
      * @apiResource App\Http\Resources\UserAnswer\UserAnswerResource
      * @apiResourceModel App\Models\UserAnswer
      * @param StoreUserAnswer $request
      * @param int $quiz_id
      * @param int $question_id
-     * @param int $answer_id
+     * @param int $answer_image_id
      * @return UserAnswerResource|JsonResponse
      */
-    public function answerToQuestion(StoreUserAnswer $request, int $quiz_id, int $question_id, int $answer_id)
+    public function answerToQuestion(StoreUserAnswer $request, int $quiz_id, int $question_id, int $answer_image_id)
     {
         $quiz = Quiz::find($quiz_id);
         if (!$quiz) return $this->respondNotFound('Quiz not found');
@@ -89,10 +89,10 @@ class QuizController extends ApiController
         $question = $quiz->questions()->where('id', $question_id)->first();
         if (!$question) return $this->respondNotFound('Question not found');
 
-        $answer = $question->answers()->where('id', $answer_id)->first();
-        if (!$answer) return $this->respondNotFound('Answer not found');
+        $answerImage = $question->answerImages()->where('id', $answer_image_id)->first();
+        if (!$answerImage) return $this->respondNotFound('Answer not found');
 
-        $userAnswerExists = UserAnswer::quiz($quiz)->question($question)->answer($answer)->user(auth()->user())->exists();
+        $userAnswerExists = UserAnswer::byQuiz($quiz)->byQuestion($question)->byAnswerImage($answerImage)->byUser(auth()->user())->exists();
 
         if ($userAnswerExists) {
             return $this->respondBadRequest('Answer already exists');
@@ -101,8 +101,8 @@ class QuizController extends ApiController
             'user_id'     => auth()->id(),
             'quiz_id'     => $quiz->id,
             'question_id' => $question->id,
-            'answer_id'   => $answer->id,
-            'is_right'    => $answer->is_right,
+            'answer_image_id'   => $answerImage->id,
+            'is_right'    => $answerImage->is_right,
             'spend_time'  => $request->spend_time,
             // TODO: save question with answers.
         ]);

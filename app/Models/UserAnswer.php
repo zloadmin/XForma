@@ -39,7 +39,7 @@ class UserAnswer extends Model
     /**
      * Scope a query to only include quiz.
      */
-    public function scopeQuiz($query, Quiz $quiz)
+    public function scopeByQuiz($query, Quiz $quiz)
     {
         return $query->where('quiz_id', $quiz->id);
     }
@@ -47,7 +47,7 @@ class UserAnswer extends Model
     /**
      * Scope a query to only include question.
      */
-    public function scopeQuestion($query, Question $question)
+    public function scopeByQuestion($query, Question $question)
     {
         return $query->where('question_id', $question->id);
     }
@@ -55,15 +55,15 @@ class UserAnswer extends Model
     /**
      * Scope a query to only include answer.
      */
-    public function scopeAnswer($query, Answer $answer)
+    public function scopeByAnswerImage($query, AnswerImage $answerImage)
     {
-        return $query->where('answer_id', $answer->id);
+        return $query->where('answer_image_id', $answerImage->id);
     }
 
     /**
      * Scope a query to only include user.
      */
-    public function scopeUser($query, User $user)
+    public function scopeByUser($query, User $user)
     {
         return $query->where('user_id', $user->id);
     }

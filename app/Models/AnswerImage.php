@@ -11,6 +11,9 @@ class AnswerImage extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $casts = [
+        'is_right' => 'boolean'
+    ];
 
     public function getUrl() : string
     {
