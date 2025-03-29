@@ -15,6 +15,7 @@ enum UserRole: string
     case Student = 'Student';
     case Teacher = 'Teacher';
     case Admin = 'Admin';
+
     public function label(): string
     {
         return match ($this) {

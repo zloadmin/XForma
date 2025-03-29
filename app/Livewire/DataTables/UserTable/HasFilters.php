@@ -85,6 +85,24 @@ trait HasFilters
             ->hiddenFromAll();
     }
 
+    public function getEmailFilter()
+    {
+        return TextFilter::make('Логин', 'email')
+            ->filter(function (Builder $builder, string $value) {
+                $builder->where('users.email', 'LIKE', '%' . $value . '%');
+            })
+            ->hiddenFromAll();
+    }
+
+    public function getPasswordUnsafeFilter()
+    {
+        return TextFilter::make('Пароль', 'password_unsafe')
+            ->filter(function (Builder $builder, string $value) {
+                $builder->where('users.password_unsafe', 'LIKE', '%' . $value . '%');
+            })
+            ->hiddenFromAll();
+    }
+
     public function getFullNameFilter()
     {
         return TextFilter::make('ФИО', 'full_name')

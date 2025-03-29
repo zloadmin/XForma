@@ -14035,7 +14035,7 @@ body.authentication-bg {
 .select2-container .select2-selection--single .select2-selection__rendered {
     display: block;
     padding-left: 8px;
-    padding-right: 20px;
+    padding-right: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
@@ -15226,20 +15226,43 @@ table.dataTable {
     margin-bottom: 15px!important
 }
 
+/*table.dataTable thead .sorting:before,table.dataTable thead .sorting_asc:before,table.dataTable thead .sorting_asc_disabled:before,table.dataTable thead .sorting_desc:before,table.dataTable thead .sorting_desc_disabled:before {*/
+/*    right: .5rem;*/
+/*    content: "\F35D";*/
+/*    font-family: "Material Design Icons";*/
+/*    font-size: 1rem;*/
+/*    top: 18px*/
+/*}*/
+
+/*table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_asc_disabled:after,table.dataTable thead .sorting_desc:after,table.dataTable thead .sorting_desc_disabled:after {*/
+/*    right: .5em;*/
+/*    content: "\F360";*/
+/*    font-family: "Material Design Icons";*/
+/*    top: 12px;*/
+/*    font-size: 1rem*/
+/*}*/
+
 table.dataTable thead .sorting:before,table.dataTable thead .sorting_asc:before,table.dataTable thead .sorting_asc_disabled:before,table.dataTable thead .sorting_desc:before,table.dataTable thead .sorting_desc_disabled:before {
     right: .5rem;
-    content: "\F35D";
+    left: auto;
+    content: "\f0360";
     font-family: "Material Design Icons";
     font-size: 1rem;
-    top: 18px
+    top: 12px
 }
 
 table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_asc_disabled:after,table.dataTable thead .sorting_desc:after,table.dataTable thead .sorting_desc_disabled:after {
     right: .5em;
-    content: "\F360";
+    left: auto;
+    content: "\f035d";
     font-family: "Material Design Icons";
-    top: 12px;
+    top: 18px;
     font-size: 1rem
+}
+
+table.dataTable thead>tr>th.sorting,table.dataTable thead>tr>th.sorting_asc,table.dataTable thead>tr>th.sorting_desc {
+    padding-right: 30px;
+    padding-left: .95rem
 }
 
 table.dataTable tbody>tr.selected,table.dataTable tbody>tr>.selected {
@@ -16024,7 +16047,7 @@ div.dt-button-info h2 {
     font-weight: 700!important
 }
 
-/*# sourceMappingURL=app.min.css.map */
+/*# sourceMappingURL=app.min.css_old.map */
 
 .shopping-card {
     display: inline-block;
@@ -16195,7 +16218,6 @@ div.dt-button-info h2 {
     background-color: #727cf5;
     border-color: #727cf5;
 }
-
-#chatMessageInput::-webkit-calendar-picker-indicator {
-    display:none !important;
+.daterangepicker .ranges ul li:first-child {
+    display: none;
 }

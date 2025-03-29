@@ -20,24 +20,28 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'username'  => 'admin',
-            'password'  => Hash::make('admin'),
-            'is_active' => true,
-            'full_name'      => 'Иванов Иван Иванович',
-            'role'      => UserRole::Admin,
+            'email'           => 'admin@admin.com',
+            'password'        => Hash::make('admin@admin.com'),
+            'password_unsafe' => 'admin@admin.com',
+            'full_name'       => 'Админ',
+            'role'            => UserRole::Admin,
         ]);
         $accessToken = $user->createToken('seeder');
         $envService = new Env();
         $envService->set("SCRIBE_AUTH_KEY", $accessToken->plainTextToken);
-        User::factory()->create([
-            'username'  => 'user',
-            'password'  => Hash::make('user'),
-            'is_active' => true,
-            'full_name'      => 'Иванов Иван Иванович',
-            'role'      => UserRole::Student,
-        ]);
+//        User::factory()->create([
+//            'email'     => 'student@student.com',
+//            'password'  => Hash::make('student@student.com'),
+//            'full_name' => 'Студент',
+//            'role'      => UserRole::Student,
+//        ]);
 
-        User::factory(10)->create();
-
+//        User::factory(10)->create();
+        Teacher::factory(5)
+            ->has(Student::factory()->count(3))
+            ->create();
+        Teacher::factory(5)
+            ->has(Student::factory()->count(10))
+            ->create();
     }
 }

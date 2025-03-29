@@ -11,20 +11,20 @@ use Illuminate\Database\Eloquent\Builder;
 
 class LoginPage extends Component
 {
-    public string $username = '';
+    public string $email = '';
     public string $password = '';
     public bool $remember = false;
     public array $credentials = [];
 
     protected $rules = [
-        'username' => ['required', 'string', 'max:' . User::USERNAME_MAX],
+        'email'    => ['required', 'email'],
         'password' => ['required']
     ];
 
     public function setCredentials()
     {
         $this->credentials = [
-            'username' => $this->username,
+            'email'    => $this->email,
             'password' => $this->password,
         ];
     }
@@ -34,7 +34,7 @@ class LoginPage extends Component
         $this->validate();
         $this->setCredentials();
         if (Auth::attempt([
-            'username' => $this->username,
+            'email' => $this->email,
             'password' => $this->password,
             fn(Builder $query) => $query->where('role', UserRole::Admin),
         ])) {

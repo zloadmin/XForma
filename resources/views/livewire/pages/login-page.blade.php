@@ -6,17 +6,17 @@
 
     <form wire:submit.prevent="login">
         <!--- Email address Field --->
-        <div class="form-group">
-            <label for="email">Логин</label>
-            <input class="form-control @error('username') is-invalid @enderror" type="text" wire:model="username" id="username" placeholder="Введите ваш логин">
-            @error('username')
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input class="form-control @error('email') is-invalid @enderror" type="email" wire:model="email" id="email" placeholder="Введите ваш email">
+            @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
         <!--- Password Field --->
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label for="password">Пароль</label>
             <input class="form-control @error('password') is-invalid @enderror" type="password" wire:model="password" placeholder="Введите ваш пароль" id="password">
             @error('password')

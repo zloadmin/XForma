@@ -25,18 +25,20 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $pass = static::$password ??= rand(11111, 99999);
         return [
-            'username'       => fake()->name,
-            'full_name'      => sprintf('%s %s %s', fake()->firstName, fake()->lastName, fake()->lastName),
-            'age'            => rand(1, 100),
-            'company_name'   => fake()->company,
-            'job_title'      => fake()->jobTitle(),
-            'note'           => fake()->realText(),
-            'education_mode' => UserEducationMode::random(),
+            'email'           => fake()->safeEmail(),
+            'password'        => Hash::make($pass),
+            'password_unsafe' => $pass,
+
+            'full_name'    => sprintf('%s %s %s', fake()->firstName, fake()->lastName, fake()->lastName),
+            'company_name' => fake()->company,
+            'job_title'    => fake()->jobTitle(),
+            'note'         => fake()->realText(30),
+
             'role'           => UserRole::random(),
-            'is_active'      => rand(0, 1),
-            'password'       => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+
         ];
     }
 

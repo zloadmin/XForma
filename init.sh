@@ -4,4 +4,5 @@ php artisan config:clear \
 &&  php artisan migrate  \
 && php artisan migrate:refresh  \
 && php artisan db:seed  \
-&& php artisan scribe:generate
+#&& php artisan scribe:generate \
+echo 'End generate'

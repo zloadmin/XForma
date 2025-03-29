@@ -12,8 +12,8 @@
 
     <link rel="manifest" href="/hyper/manifest.json" />
 
-    <!-- third party css -->
-    <link href="/hyper/css/vendor/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <!-- third party css_old -->
+    <link href="/hyper/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
     <link href="/hyper/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/hyper/css/app.min.css" rel="stylesheet" type="text/css" />
 

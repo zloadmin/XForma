@@ -184,6 +184,8 @@ return [
         'role'                  => 'роль',
         'password_confirmation' => 'подтверждение пароля',
         'answerImages'          => 'ответы',
+        'password_unsafe'       => 'пароль',
+        'student_ids'           => 'студенты',
     ],
 
 ];

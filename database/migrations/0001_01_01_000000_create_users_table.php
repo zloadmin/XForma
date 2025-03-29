@@ -16,18 +16,20 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            $table->string('username', User::USERNAME_MAX)->unique()->comment('Логин');
+            $table->string('email')->unique()->comment('Email');
             $table->string('password')->comment('Пароль');
-            $table->string('full_name')->comment('Имя обучающегося (фио)');
-            $table->unsignedSmallInteger('age')->nullable()->comment('Возраст');
+            $table->string('password_unsafe')->comment('Пароль');
+            $table->string('full_name')->comment('ФИО');
             $table->string('company_name')->nullable()->comment('Организация');
             $table->string('job_title')->nullable()->comment('Должность');
             $table->text('note')->nullable()->comment('Примечание');
-            $table->enum('education_mode', UserEducationMode::values())->nullable()->comment('Режим обучения');
-            $table->boolean('is_active')->index()->default(true);
+
+
             $table->enum('role', UserRole::values())->index()->default(UserRole::Student)->comment('Роль');
 
-            // TODO: make relationship - Экзамен - случайное задание или задание из списка билетов (множественный выбор)
+//            $table->unsignedSmallInteger('age')->nullable()->comment('Возраст');
+//            $table->enum('education_mode', UserEducationMode::values())->nullable()->comment('Режим обучения');
+//            $table->boolean('is_active')->index()->default(true);
 
             $table->rememberToken();
             $table->timestamps();
