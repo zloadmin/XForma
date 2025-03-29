@@ -2,8 +2,8 @@
 
 namespace App\Livewire\DataTables;
 
-use App\Livewire\DataTables\UserTable\HasColumns;
-use App\Livewire\DataTables\UserTable\HasFilters;
+use App\Livewire\DataTables\TeacherTable\HasColumns;
+use App\Livewire\DataTables\TeacherTable\HasFilters;
 use App\Livewire\Traits\HasEvents;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,13 +20,7 @@ class TeachersTable extends DataTableComponent
 
     protected $model = Teacher::class;
 
-//    public function builder(): Builder
-//    {
-//        return Teacher::query()
-//            ->withCount('students'); // Eager load anything
-////            ->join() // Join some tables
-////            ->select(); // Select some things
-//    }
+
 
     public function mount()
     {
@@ -88,27 +82,6 @@ class TeachersTable extends DataTableComponent
         $this->mount();
     }
 
-    public function getActionHTML(Teacher $teacher)
-    {
 
-        $click = "\$dispatch('showModal', {data: {'alias' : 'modals.teacher.edit-teacher-modal','params' :{'teacherId': $teacher->id}}})";
-        $editRoute = '';
-        return <<<HTML
-
-           <nobr>
-            <button type="button"  wire:click="$click" class="btn btn-link action-icon" >
-                <i class="mdi mdi-pencil"></i>
-            </button>
-                    
-                <a href="#" class="action-icon"
-                        wire:click.prevent="deleteTeacher($teacher->id)"
-                        wire:confirm="Удалить преподавателя?"
-                >
-                    <i class="mdi mdi-delete"></i>
-                </a>
-            </nobr>
-                   
-HTML;
-    }
 
 }

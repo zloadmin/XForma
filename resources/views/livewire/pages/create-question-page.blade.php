@@ -1,1 +1,0 @@
-@include('livewire.pages.question.question-form')

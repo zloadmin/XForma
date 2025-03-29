@@ -2,9 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Livewire\DataTables\UserTable;
+namespace App\Livewire\DataTables\TeacherTable;
 
 
+use App\Models\Teacher;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\CountColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberRangeFilter;
@@ -15,35 +16,12 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\NumberRangeFilter;
 trait HasColumns
 {
 
-    public function getIsActiveColumn()
-    {
-        return Column::make("Активен", "is_active")
-            ->format(
-                fn($value, $row, Column $column) => $row->is_active ? 'Да' : 'Нет'
-            )
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('is_active'));
-    }
 
     public function getIdColumn()
     {
         return Column::make("ID", "id")
             ->sortable()
             ->secondaryHeader($this->getFilterByKey('id'));
-    }
-
-    public function getCreatedAtColumn()
-    {
-        return Column::make("Добавлен", "created_at")
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('created_at'));
-    }
-
-    public function getUsernameColumn()
-    {
-        return Column::make("Логин", "username")
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('username'));
     }
 
     public function getFullNameColumn()
@@ -67,13 +45,6 @@ trait HasColumns
             ->secondaryHeader($this->getFilterByKey('password_unsafe'));
     }
 
-    public function getAgeColumn()
-    {
-        return Column::make("Возраст", "age")
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('age'));
-    }
-
     public function getCompanyNameColumn()
     {
         return Column::make("Организация", "company_name")
@@ -93,26 +64,6 @@ trait HasColumns
         return Column::make("Примечание", "note");
     }
 
-    public function getEducationModeColumn()
-    {
-        return Column::make("Режим обучения", "education_mode")
-            ->format(
-                fn($value, $row, Column $column) => $row->education_mode->label()
-            )
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('education_mode'));
-    }
-
-    public function getRoleColumn()
-    {
-        return Column::make("Роль", "role")
-            ->format(
-                fn($value, $row, Column $column) => $row->role->label()
-            )
-            ->sortable()
-            ->secondaryHeader($this->getFilterByKey('role'));
-    }
-
     public function getActionColumn()
     {
         return Column::make('', 'id')
@@ -127,11 +78,28 @@ trait HasColumns
         return CountColumn::make('Студенты')
             ->setDataSource('students')
             ->sortable();
+    }
 
-//        return Column::make('Студенты', 'id')
-//            ->format(
-//                fn($value, $row, Column $column) => $this->getStudentsHTML($row)
-//            )
-//            ->html();
+    public function getActionHTML(Teacher $teacher)
+    {
+
+        $click = "\$dispatch('showModal', {data: {'alias' : 'modals.teacher.edit-teacher-modal','params' :{'teacherId': $teacher->id}}})";
+        $editRoute = '';
+        return <<<HTML
+
+           <nobr>
+            <button type="button"  wire:click="$click" class="btn btn-link action-icon" >
+                <i class="mdi mdi-pencil"></i>
+            </button>
+                    
+                <a href="#" class="action-icon"
+                        wire:click.prevent="deleteTeacher($teacher->id)"
+                        wire:confirm="Удалить преподавателя?"
+                >
+                    <i class="mdi mdi-delete"></i>
+                </a>
+            </nobr>
+                   
+HTML;
     }
 }

@@ -10,22 +10,22 @@ Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
     });
-    // Auth
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('info', [AuthController::class, 'info']);
-        Route::prefix('quiz')->group(function () {
-            Route::get('list', [QuizController::class, 'list']);
-            Route::get('{quiz}', [QuizController::class, 'show']);
-            Route::get('{quiz}/statistics', [QuizController::class, 'statistics']);
-            Route::post('{quiz_id}/question/{question_id}/answer/{answer_image_id}', [QuizController::class, 'answerToQuestion']);
-        });
-        Route::prefix('ticket')->group(function () {
-            Route::get('list', [TicketController::class, 'list']);
-            Route::get('{ticket}', [TicketController::class, 'show']);
-            Route::post('answer/{ticket}/{ticketStep}/{ticketStepAction}', [TicketController::class, 'answer']);
-            Route::post('/finish/{ticket}', [TicketController::class, 'finish']);
-        });
-    });
+//    // Auth
+//    Route::middleware('auth:sanctum')->group(function () {
+//        Route::get('info', [AuthController::class, 'info']);
+//        Route::prefix('quiz')->group(function () {
+//            Route::get('list', [QuizController::class, 'list']);
+//            Route::get('{quiz}', [QuizController::class, 'show']);
+//            Route::get('{quiz}/statistics', [QuizController::class, 'statistics']);
+//            Route::post('{quiz_id}/question/{question_id}/answer/{answer_image_id}', [QuizController::class, 'answerToQuestion']);
+//        });
+//        Route::prefix('ticket')->group(function () {
+//            Route::get('list', [TicketController::class, 'list']);
+//            Route::get('{ticket}', [TicketController::class, 'show']);
+//            Route::post('answer/{ticket}/{ticketStep}/{ticketStepAction}', [TicketController::class, 'answer']);
+//            Route::post('/finish/{ticket}', [TicketController::class, 'finish']);
+//        });
+//    });
 });
 //Route::post('test', function (Request $request) {
 //    \App\Models\Answer::query()->first()->storeMedia($request->file('file'));
