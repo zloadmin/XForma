@@ -33,7 +33,7 @@ trait HasTeacherForm
     {
         return [
             'full_name'       => ['required', 'string', 'max:200'],
-            'email'           => ['required', 'email', 'max:200', Rule::unique('users', 'email')],
+            'email'           => ['required', 'email', 'max:200', Rule::unique('users', 'email')->ignore($this->teacher ?? null)],
             'password_unsafe' => ['required', 'string', 'min:4', 'max:200'],
             'company_name'    => ['nullable', 'string', 'max:200'],
             'job_title'       => ['nullable', 'string', 'max:200'],
