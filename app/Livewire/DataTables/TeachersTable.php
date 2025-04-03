@@ -71,8 +71,9 @@ class TeachersTable extends DataTableComponent
     public function getStudentsHTML(Teacher $teacher): string
     {
         $href = route('students-page', ['teacher_id' => $teacher->id]);
+        $count = $teacher->students->count();
 
-        return sprintf('<a  href="%s" wire:navigate>%d</a>', $href, $teacher->students->count());
+        return sprintf('<a href="%s" wire:navigate>%d</a>', $href, $count);
     }
 
     #[On(self::EVENT_REFRESH_TEACHERS_TABLE)]

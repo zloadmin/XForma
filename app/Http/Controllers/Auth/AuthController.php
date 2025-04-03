@@ -22,7 +22,6 @@ class AuthController extends ApiController
      * Вход в систему
      *
      * @response status=400 scenario="Credential Mismatch" {"status":"error","message":"Credential Mismatch"}
-     * @response status=400 scenario="User Inactive" {"status":"error","message":"User inactive"}
      * @response status=429 scenario="Validation Errors"
      * @apiResource App\Http\Resources\User\UserResource
      * @apiResourceModel App\Models\User
@@ -31,12 +30,10 @@ class AuthController extends ApiController
     public function login(SignInUserRequest $request)
     {
 
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            if (!$user->is_active) {
-                return $this->respondBadRequest('User inactive');
-            }
+
             $accessToken = $user->createToken('login');
             return (new UserResource($user))->additional([
                 'accessToken' => $accessToken->plainTextToken

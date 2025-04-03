@@ -17,8 +17,8 @@ class TicketResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
-            'steps'      => TicketStepResource::collection($this->whenLoaded('steps')),
-            'step_count' => $this->whenCounted('steps'),
+            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at,
         ];
     }
 }

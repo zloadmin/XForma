@@ -6,5 +6,6 @@ php artisan config:clear \
 && php artisan app:import-tasks  \
 && php artisan app:import-tickets  \
 && php artisan db:seed  \
-#&& php artisan scribe:generate \
+&& php artisan scribe:generate \
+&&
 echo 'End generate'

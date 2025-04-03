@@ -23,8 +23,8 @@ class SignInUserRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'username' => ['description' => 'Логин', 'example' => 'admin'],
-            'password' => ['description' => 'Пароль', 'example' => 'password'],
+            'email'    => ['description' => 'Email', 'example' => 'admin@admin.com'],
+            'password' => ['description' => 'Пароль', 'example' => 'admin@admin.com'],
         ];
     }
 
@@ -36,7 +36,7 @@ class SignInUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string', 'max:' . User::USERNAME_MAX],
+            'email'    => ['required', 'email'],
             'password' => ['required'],
         ];
     }
