@@ -14,6 +14,6 @@ class TeacherRoleScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('role', UserRole::Teacher);
+        $builder->where('users.role', UserRole::Teacher);
     }
 }

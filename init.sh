@@ -3,6 +3,8 @@
 php artisan config:clear \
 &&  php artisan migrate  \
 && php artisan migrate:refresh  \
+&& php artisan app:import-tasks  \
+&& php artisan app:import-tickets  \
 && php artisan db:seed  \
 #&& php artisan scribe:generate \
 echo 'End generate'

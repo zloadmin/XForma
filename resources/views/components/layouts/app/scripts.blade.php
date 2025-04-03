@@ -17,6 +17,7 @@
     // });
 </script>
 
+
 <livewire:modals/>
 <livewire:scripts/>
 @vite('resources/js/app.js')

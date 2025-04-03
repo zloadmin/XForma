@@ -144,6 +144,7 @@ return [
     'custom' => [
         'attribute-name' => [
 //            'password' => 'пароль',
+
         ],
     ],
 
@@ -186,6 +187,10 @@ return [
         'answerImages'          => 'ответы',
         'password_unsafe'       => 'пароль',
         'student_ids'           => 'студенты',
+        'random_mode'           => 'случайность',
+        'ticket_ids'            => 'билеты',
+        'teacher_id'            => 'преподаватель',
+
     ],
 
 ];

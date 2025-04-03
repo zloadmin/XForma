@@ -19,6 +19,18 @@ trait HasBreadcrumb
     {
         return [route('teachers-page') => 'Преподаватели'];
     }
+    private function getStudentsPageItem(): array
+    {
+        return [route('teachers-page') => 'Ученики'];
+    }
+    private function getTasksPageItem(): array
+    {
+        return [route('tasks-page') => 'Задания'];
+    }
+    private function getTicketsPageItem(): array
+    {
+        return [route('tickets-page') => 'Билеты'];
+    }
 
 //
 //    private function getQuizzesPageItem(): array

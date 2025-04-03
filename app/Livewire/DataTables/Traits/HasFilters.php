@@ -2,11 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Livewire\DataTables\TeacherTable;
+namespace App\Livewire\DataTables\Traits;
 
 
 use App\Enums\User\UserEducationMode;
+use App\Enums\User\UserRandomMode;
 use App\Enums\User\UserRole;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateRangeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
@@ -70,5 +72,39 @@ trait HasFilters
                 $builder->where('users.job_title', 'LIKE', '%' . $value . '%');
             })
             ->hiddenFromAll();
+    }
+
+    public function getEducationModeFilter()
+    {
+
+        return SelectFilter::make('Доступные режимы', 'education_mode')
+            ->options(UserEducationMode::getSelectFilterOptions())
+            ->filter(function (Builder $builder, string $value) {
+                if ($value) {
+                    $builder->where('users.education_mode', $value);
+                }
+            })->hiddenFromAll();
+    }
+    public function getTeacherFilter()
+    {
+
+        return SelectFilter::make('Преподаватель', 'teacher_id')
+            ->options([0 => 'Все'] + Teacher::pluck('full_name', 'id')->toArray())
+            ->filter(function (Builder $builder, string $value) {
+                if ($value) {
+                    $builder->where('users.teacher_id', $value);
+                }
+            })->hiddenFromAll();
+    }
+    public function getRandomModeFilter()
+    {
+
+        return SelectFilter::make('Случайность', 'random_mode')
+            ->options(UserRandomMode::getSelectFilterOptions())
+            ->filter(function (Builder $builder, string $value) {
+                if ($value) {
+                    $builder->where('users.random_mode', $value);
+                }
+            })->hiddenFromAll();
     }
 }

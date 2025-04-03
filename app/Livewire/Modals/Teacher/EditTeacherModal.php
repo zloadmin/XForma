@@ -45,8 +45,10 @@ class EditTeacherModal extends Component
             'job_title'       => $this->job_title,
             'note'            => $this->note,
         ]);
+//        $this->teacher->students()->sync($this->student_ids);
+        Student::where('teacher_id', $this->teacher->id)->update(['teacher_id' => null]);
+        Student::whereIn('id', $this->student_ids)->update(['teacher_id' => $this->teacher->id]);
 
-        $this->teacher->students()->sync($this->student_ids);
 
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\User\UserEducationMode;
+use App\Enums\User\UserRandomMode;
 use App\Enums\User\UserRole;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-
+            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->string('email')->unique()->comment('Email');
             $table->string('password')->comment('Пароль');
             $table->string('password_unsafe')->comment('Пароль');
@@ -28,12 +29,15 @@ return new class extends Migration {
             $table->enum('role', UserRole::values())->index()->default(UserRole::Student)->comment('Роль');
 
 //            $table->unsignedSmallInteger('age')->nullable()->comment('Возраст');
-//            $table->enum('education_mode', UserEducationMode::values())->nullable()->comment('Режим обучения');
-//            $table->boolean('is_active')->index()->default(true);
+            $table->enum('education_mode', UserEducationMode::values())->nullable()->comment('Режим обучения');
+            $table->enum('random_mode', UserRandomMode::values())->nullable()->comment('Случайность');
 
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
+        // todo: add
+        // $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

@@ -2,9 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Livewire\DataTables\TeacherTable;
+namespace App\Livewire\DataTables\Traits;
 
 
+use App\Enums\User\UserRandomMode;
 use App\Models\Teacher;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\CountColumn;
@@ -64,6 +65,51 @@ trait HasColumns
         return Column::make("Примечание", "note");
     }
 
+    public function getTeacherColumn()
+    {
+        return Column::make("Преподаватель", "teacher.full_name")
+            ->sortable()
+            ->secondaryHeader($this->getFilterByKey('teacher_id'));
+    }
+
+
+    public function getEducationModeColumn()
+    {
+        return Column::make("Доступные режимы", "education_mode")
+            ->format(
+                fn($value, $row, Column $column) => $row->education_mode ? $row->education_mode->label() : ''
+            )
+            ->sortable()
+            ->secondaryHeader($this->getFilterByKey('education_mode'));
+    }
+
+    public function getRandomModeColumn()
+    {
+        return Column::make("Случайность", "random_mode")
+            ->format(
+                fn($value, $row, Column $column) => $row->random_mode ? $row->random_mode->label() : ''
+            )
+            ->sortable()
+            ->secondaryHeader($this->getFilterByKey('random_mode'));
+    }
+
+    public function getTicketsColumn()
+    {
+        return Column::make("Билеты")
+            ->label(
+                function ($row, Column $column) {
+                    if ($row->random_mode === UserRandomMode::Yes) {
+                        return 'Все';
+                    }
+                    if ($row->random_mode === UserRandomMode::No) {
+                        return implode(',', $row->tickets->pluck('id')->toArray());
+                    }
+                    return '';
+
+                }
+            );
+    }
+
     public function getActionColumn()
     {
         return Column::make('', 'id')
@@ -73,33 +119,16 @@ trait HasColumns
             ->html();
     }
 
+
     public function getStudentsColumn()
     {
-        return CountColumn::make('Студенты')
-            ->setDataSource('students')
-            ->sortable();
+
+        return Column::make("Студенты")
+            ->label(
+                fn($row, Column $column) => $this->getStudentsHTML($row)
+            )->html();
+
     }
 
-    public function getActionHTML(Teacher $teacher)
-    {
 
-        $click = "\$dispatch('showModal', {data: {'alias' : 'modals.teacher.edit-teacher-modal','params' :{'teacherId': $teacher->id}}})";
-        $editRoute = '';
-        return <<<HTML
-
-           <nobr>
-            <button type="button"  wire:click="$click" class="btn btn-link action-icon" >
-                <i class="mdi mdi-pencil"></i>
-            </button>
-                    
-                <a href="#" class="action-icon"
-                        wire:click.prevent="deleteTeacher($teacher->id)"
-                        wire:confirm="Удалить преподавателя?"
-                >
-                    <i class="mdi mdi-delete"></i>
-                </a>
-            </nobr>
-                   
-HTML;
-    }
 }

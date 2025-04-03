@@ -38,7 +38,9 @@ class CreateTeacherModal extends Component
             'note'            => $this->note,
         ]);
 
-        $teacher->students()->sync($this->student_ids);
+        if($this->student_ids) {
+            Student::whereIn('id', $this->student_ids)->update(['teacher_id' => $teacher->id]);
+        }
 
     }
 

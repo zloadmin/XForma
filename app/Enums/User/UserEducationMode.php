@@ -14,12 +14,14 @@ enum UserEducationMode: string
 
     case Training = 'Training';
     case Exam = 'Exam';
+    case ExamDone = 'ExamDone';
 
     public function label(): string
     {
         return match ($this) {
             self::Training => 'Обучение',
             self::Exam => 'Экзамен',
+            self::ExamDone => 'Экзамен сдан',
         };
     }
 }

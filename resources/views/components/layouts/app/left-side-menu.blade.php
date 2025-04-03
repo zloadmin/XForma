@@ -47,6 +47,31 @@
                                         <span>Преподаватели</span>
                                     </a>
                                 </li>
+                                <li class="side-nav-item">
+                                    <a href="{{ route('students-page') }}" class="side-nav-link" wire:navigate>
+                                        <i class="uil-science"></i>
+                                        <span>Ученики</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="{{ route('tasks-page') }}" class="side-nav-link" wire:navigate>
+                                        <i class="uil-paperclip"></i>
+                                        <span>Задания</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="{{ route('tickets-page') }}" class="side-nav-link" wire:navigate>
+                                        <i class="uil-card-atm"></i>
+                                        <span>Билеты</span>
+                                    </a>
+                                </li>
+
+                                <li class="side-nav-item">
+                                    <a href="/docs/" class="side-nav-link" target="_blank">
+                                        <i class="uil-document"></i>
+                                        <span>API документация</span>
+                                    </a>
+                                </li>
 
                             </ul>
 

@@ -2,8 +2,8 @@
 
 namespace App\Livewire\DataTables;
 
-use App\Livewire\DataTables\TeacherTable\HasColumns;
-use App\Livewire\DataTables\TeacherTable\HasFilters;
+use App\Livewire\DataTables\Traits\HasColumns;
+use App\Livewire\DataTables\Traits\HasFilters;
 use App\Livewire\Traits\HasEvents;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,8 +18,13 @@ class TeachersTable extends DataTableComponent
     use HasColumns;
     use HasEvents;
 
-    protected $model = Teacher::class;
-
+//    protected $model = Teacher::class;
+    public function builder(): Builder
+    {
+        return Teacher::query()
+            ->withCount('students')
+            ->with(['students']);
+    }
 
 
     public function mount()
@@ -65,9 +70,9 @@ class TeachersTable extends DataTableComponent
 
     public function getStudentsHTML(Teacher $teacher): string
     {
-        $editRoute = ''; //route('edit-user-page', $user);
+        $href = route('students-page', ['teacher_id' => $teacher->id]);
 
-        return sprintf('<a  wire:click="%s">%d</a>', $click, $teacher->students_count);
+        return sprintf('<a  href="%s" wire:navigate>%d</a>', $href, $teacher->students->count());
     }
 
     #[On(self::EVENT_REFRESH_TEACHERS_TABLE)]
@@ -77,11 +82,32 @@ class TeachersTable extends DataTableComponent
     }
     public function deleteTeacher($id): void
     {
-        $teacher = Teacher::findOrFail($id);
-        $teacher->delete();
+        $teacher = Teacher::find($id);
+        $teacher?->delete();
         $this->mount();
     }
 
+    public function getActionHTML(Teacher $teacher)
+    {
 
+        $click = "\$dispatch('showModal', {data: {'alias' : 'modals.teacher.edit-teacher-modal','params' :{'teacherId': $teacher->id}}})";
+        $editRoute = '';
+        return <<<HTML
+
+           <nobr>
+            <button type="button"  wire:click="$click" class="btn btn-link action-icon" >
+                <i class="mdi mdi-pencil"></i>
+            </button>
+                    
+                <a href="#" class="action-icon"
+                        wire:click.prevent="deleteTeacher($teacher->id)"
+                        wire:confirm="Удалить преподавателя?"
+                >
+                    <i class="mdi mdi-delete"></i>
+                </a>
+            </nobr>
+                   
+        HTML;
+    }
 
 }
