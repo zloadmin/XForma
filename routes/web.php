@@ -10,6 +10,7 @@ use App\Livewire\Pages\QuestionsPage;
 use App\Livewire\Pages\Quiz\CreateQuizPage;
 use App\Livewire\Pages\Quiz\EditQuizPage;
 use App\Livewire\Pages\QuizzesPage;
+use App\Livewire\Pages\ResultsPage;
 use App\Livewire\Pages\StudentsPage;
 use App\Livewire\Pages\TeachersPage;
 use App\Livewire\Pages\TasksPage;
@@ -25,13 +26,13 @@ Route::get('/login', LoginPage::class)
     ->name('login-page');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', DashboardPage::class)->name('dashboard');
+//    Route::get('/', DashboardPage::class)->name('dashboard');
     Route::get('/teachers', TeachersPage::class)->name('teachers-page');
     Route::get('/students', StudentsPage::class)->name('students-page');
     Route::get('/tasks', TasksPage::class)->name('tasks-page');
     Route::get('/tickets', TicketsPage::class)->name('tickets-page');
-
-
+//    Route::get('/results', ResultsPage::class)->name('results-page');
+    Route::get('/', ResultsPage::class)->name('dashboard');
 
     Route::post('logout', function () {
         Auth::logout();

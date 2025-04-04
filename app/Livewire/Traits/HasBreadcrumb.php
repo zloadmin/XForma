@@ -15,18 +15,27 @@ trait HasBreadcrumb
     {
         return [route('dashboard') => 'Панель'];
     }
-        private function getTeachersPageItem(): array
+
+    private function getTeachersPageItem(): array
     {
         return [route('teachers-page') => 'Преподаватели'];
     }
+
+    private function getResultsPageItem(): array
+    {
+        return [route('dashboard') => 'Результаты'];
+    }
+
     private function getStudentsPageItem(): array
     {
         return [route('teachers-page') => 'Ученики'];
     }
+
     private function getTasksPageItem(): array
     {
         return [route('tasks-page') => 'Задания'];
     }
+
     private function getTicketsPageItem(): array
     {
         return [route('tickets-page') => 'Билеты'];

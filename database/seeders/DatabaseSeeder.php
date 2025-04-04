@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\TicketAnswer;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\ResultFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-//            QuizSeeder::class,
-//            UserAnswerSeeder::class,
-//            TicketSeeder::class,
-//            TicketAnswerSeeder::class,
+            ResultSeeder::class
         ]);
     }
 }

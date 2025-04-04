@@ -37,11 +37,11 @@ class UserSeeder extends Seeder
 //        ]);
 
 //        User::factory(10)->create();
-        Teacher::factory(5)
-            ->has(Student::factory()->count(3))
+        Teacher::factory(1)
+            ->has(Student::factory()->count(1))
             ->create();
-        Teacher::factory(5)
-            ->has(Student::factory()->count(10))
+        Teacher::factory(2)
+            ->has(Student::factory()->count(2))
             ->create();
     }
 }

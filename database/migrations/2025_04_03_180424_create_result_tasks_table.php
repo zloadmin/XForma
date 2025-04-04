@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('result_id');
             $table->foreign('result_id')->references('id')->on('results')->onDelete('cascade');
             $table->unsignedBigInteger('task_id');
-            $table->foreign('task_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->unsignedBigInteger('point_accuracy');
             $table->unsignedBigInteger('point_consistency');
             $table->timestamps();

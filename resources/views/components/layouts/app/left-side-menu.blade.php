@@ -37,10 +37,18 @@
 
                                 <li class="side-nav-item">
                                     <a href="{{ route('dashboard') }}" class="side-nav-link" wire:navigate>
-                                        <i class="uil-home-alt"></i>
-                                        <span>Панель</span>
+                                        <i class="uil-list-ul"></i>
+                                        <span>Результаты</span>
                                     </a>
                                 </li>
+
+{{--                                --}}
+{{--                                <li class="side-nav-item">--}}
+{{--                                    <a href="{{ route('dashboard') }}" class="side-nav-link" wire:navigate>--}}
+{{--                                        <i class="uil-home-alt"></i>--}}
+{{--                                        <span>Панель</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="side-nav-item">
                                     <a href="{{ route('teachers-page') }}" class="side-nav-link" wire:navigate>
                                         <i class="uil-user-check"></i>
