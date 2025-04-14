@@ -74,12 +74,12 @@
                                     </a>
                                 </li>
 
-                                <li class="side-nav-item">
-                                    <a href="/docs/" class="side-nav-link" target="_blank">
-                                        <i class="uil-document"></i>
-                                        <span>API документация</span>
-                                    </a>
-                                </li>
+{{--                                <li class="side-nav-item">--}}
+{{--                                    <a href="/docs/" class="side-nav-link" target="_blank">--}}
+{{--                                        <i class="uil-document"></i>--}}
+{{--                                        <span>API документация</span>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
 
                             </ul>
 
