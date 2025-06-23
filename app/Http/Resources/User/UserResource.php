@@ -20,8 +20,8 @@ class UserResource extends JsonResource
             'id'             => $this->id,
             'full_name'      => $this->full_name,
             'email'          => $this->email,
-            'random_mode'    => $this->when($this->isStudent(), 'random_mode'),
-            'education_mode' => $this->when($this->isStudent(), 'education_mode'),
+            'random_mode'    => $this->when($this->isStudent(), $this->random_mode),
+            'education_mode' => $this->when($this->isStudent(), $this->education_mode),
             'tickets' => $this->when($this->isStudent(), function () {
                 return $this->tickets()->get();
             }),
