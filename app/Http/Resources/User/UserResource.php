@@ -25,9 +25,6 @@ class UserResource extends JsonResource
             'tickets' => $this->when($this->isStudent(), function () {
                 return $this->tickets()->get();
             }),
-//            'random_mode' => $this->when($this->role == UserRole::Student, function () {
-//                return $this->random_mode
-//            }),
             'created_at'     => $this->created_at,
             'updated_at'     => $this->updated_at,
         ];
