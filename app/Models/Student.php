@@ -19,10 +19,7 @@ class Student extends User
 
     protected $table = 'users';
 
-    public function tickets(): BelongsToMany
-    {
-        return $this->belongsToMany(Ticket::class);
-    }
+
 
     public function teacher() : BelongsTo
     {
@@ -36,7 +33,6 @@ class Student extends User
 
     public function isRandomMode(): bool
     {
-
         return $this->random_mode == UserRandomMode::Yes->value;
     }
 }

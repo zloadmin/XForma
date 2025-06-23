@@ -7,6 +7,7 @@ use App\Enums\User\UserEducationMode;
 use App\Enums\User\UserRandomMode;
 use App\Enums\User\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,10 +40,19 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'role' => UserRole::class,
-            'education_mode' => UserEducationMode::class,
-            'random_mode' => UserRandomMode::class
+            'password'          => 'hashed',
+            'role'              => UserRole::class,
+            'education_mode'    => UserEducationMode::class,
+            'random_mode'       => UserRandomMode::class
         ];
+    }
+
+    public function isStudent(): bool
+    {
+        return $this->role === UserRole::Student;
+    }
+    public function tickets(): BelongsToMany
+    {
+        return $this->belongsToMany(Ticket::class, 'student_ticket', 'student_id', 'ticket_id');
     }
 }
